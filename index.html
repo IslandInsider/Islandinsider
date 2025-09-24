@@ -1,538 +1,854 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Around The Rock — Your Complete Guernsey Guide</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Around The Rock - Your Complete Guernsey Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;900&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 25%, #10b981 50%, #3b82f6 75%, #8b5cf6 100%);
+            min-height: 100vh;
+            position: relative;
+        }
 
-  <!-- SEO / Social -->
-  <meta name="description" content="Around The Rock — your complete guide to Guernsey: restaurants, events, markets, activities and trusted services." />
-  <meta property="og:title" content="Around The Rock — Guernsey Guide" />
-  <meta property="og:description" content="Discover food, events, markets and more on Guernsey." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="/og-image.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1580919350391-c8e1b3e4f5c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
+            opacity: 0.15;
+            z-index: -2;
+        }
 
-  <style>
-    :root{
-      --brand1:#0ea5e9; --brand2:#06b6d4; --brand3:#10b981; --brand4:#3b82f6; --brand5:#8b5cf6;
-      --ink:#111827; --ink-2:#374151; --ink-3:#4b5563; --muted:#6b7280; --line:#e5e7eb; --panel:#ffffff;
-      --focus: #10b981;
-    }
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.9) 0%, rgba(16, 185, 129, 0.8) 100%);
+            z-index: -1;
+        }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: linear-gradient(135deg, var(--brand1) 0%, var(--brand2) 25%, var(--brand3) 50%, var(--brand4) 75%, var(--brand5) 100%);
-      min-height: 100vh;
-      color: var(--ink);
-    }
-    body::before{
-      content:'';
-      position:fixed; inset:0;
-      background:url('https://images.unsplash.com/photo-1580919350391-c8e1b3e4f5c3?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
-      opacity:.15; z-index:-2;
-    }
-    body::after{
-      content:'';
-      position:fixed; inset:0;
-      background:linear-gradient(135deg, rgba(14,165,233,.9) 0%, rgba(16,185,129,.8) 100%);
-      z-index:-1;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; }
-    }
-    a { color: inherit; }
-    .skip-link{
-      position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
-    }
-    .skip-link:focus{
-      position:fixed; left:16px; top:16px; width:auto; height:auto; padding:.5rem .75rem; background:#fff; border-radius:8px; outline:3px solid var(--focus);
-      z-index:9999;
-    }
-    header.hero {
-      background: rgba(255,255,255,.98);
-      backdrop-filter: blur(20px);
-      padding: 40px 20px;
-      text-align: center;
-      border-bottom: 4px solid var(--brand3);
-      margin-bottom: 30px;
-      box-shadow: 0 8px 32px rgba(0,0,0,.1);
-    }
-    header.hero h1 {
-      font-size: clamp(2rem, 4vw + 1rem, 3.5rem);
-      background: linear-gradient(135deg, var(--brand1), var(--brand3));
-      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-      margin:0 0 12px; font-weight:900; letter-spacing:-2px;
-    }
-    .tagline { font-size:1.2rem; color: var(--ink-2); font-weight:700; margin-bottom:8px; }
-    .subtitle { font-size:1.05rem; color:#334155; max-width:820px; margin:0 auto 18px; line-height:1.6; }
-    .cta{
-      background: linear-gradient(135deg, var(--brand3), #059669);
-      color:#fff; padding:14px 24px; border-radius:999px; border:none; font-weight:800; cursor:pointer;
-      box-shadow:0 8px 25px rgba(16,185,129,.3);
-    }
-    .cta:focus-visible, .filter-btn:focus-visible, .view-btn:focus-visible, .close-btn:focus-visible, .submit-btn:focus-visible {
-      outline: 3px solid var(--focus); outline-offset:2px;
-    }
+        .hero-section {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 4px solid #10b981;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
 
-    .container{ max-width:1400px; margin:0 auto; padding:0 20px; }
-    .layout{
-      display:grid; grid-template-columns: 350px 1fr; gap:30px; margin-bottom:50px;
-    }
-    aside.sidebar{ position:sticky; top:20px; height: fit-content; }
-    .card{
-      background: rgba(255,255,255,.97); backdrop-filter: blur(20px);
-      border-radius:24px; padding:24px; margin-bottom:20px;
-      box-shadow: 0 12px 40px rgba(0,0,0,.1); border:2px solid rgba(255,255,255,.3);
-    }
-    .card h3{ color:var(--ink-2); margin:0 0 14px; font-size:1.05rem; font-weight:800; display:flex; align-items:center; gap:.5rem;}
+        .hero-section h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
 
-    .search-input, select, textarea, input[type="text"], input[type="email"]{
-      width:100%; padding:14px 16px; border:2px solid var(--line); border-radius:14px; font-size:16px; background:#fff;
-    }
-    .search-input:focus, select:focus, textarea:focus, input[type="text"]:focus, input[type="email"]:focus {
-      outline:none; border-color: var(--focus); box-shadow:0 0 0 4px rgba(16,185,129,.12);
-    }
+        .hero-section .tagline {
+            font-size: 1.4em;
+            color: #374151;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
 
-    .filter-buttons{ display:flex; flex-wrap:wrap; gap:10px; }
-    .filter-btn{
-      appearance:none; background:#f8fafc; border:2px solid #e5e7eb; padding:10px 16px; border-radius:24px;
-      cursor:pointer; font-size:14px; font-weight:700; color:var(--ink-2);
-    }
-    .filter-btn[aria-pressed="true"]{
-      background: linear-gradient(135deg, var(--brand3), #059669); color:#fff; border-color: var(--brand3);
-      box-shadow:0 6px 18px rgba(16,185,129,.28);
-    }
+        .hero-section .subtitle {
+            font-size: 1.1em;
+            color: #6b7280;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+        }
 
-    main.content{ background: rgba(255,255,255,.97); backdrop-filter: blur(20px);
-      border-radius:24px; padding:32px; box-shadow:0 12px 40px rgba(0,0,0,.1); border:2px solid rgba(255,255,255,.3);
-    }
-    .content-header{ display:flex; justify-content:space-between; align-items:center; gap:16px; padding-bottom:18px; border-bottom:3px solid #f3f4f6; margin-bottom:22px;}
-    .results-count{ color:#374151; font-weight:700;}
-    .view-toggle{ display:flex; gap:8px;}
-    .view-btn{ padding:10px 14px; border:2px solid #e5e7eb; background:#fff; border-radius:12px; cursor:pointer; font-weight:800;}
-    .view-btn.active{
-      background: linear-gradient(135deg, var(--brand1), var(--brand2)); color:#fff; border-color:var(--brand1);
-      box-shadow:0 4px 15px rgba(14,165,233,.25);
-    }
+        .add-highlight {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1em;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
 
-    .grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(360px,1fr)); gap:24px; }
-    .list{ display:flex; flex-direction:column; gap:22px; }
+        .add-highlight:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+        }
 
-    article.card.listing{
-      background:#fff; border-radius:20px; overflow:hidden; border:2px solid transparent; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-      box-shadow:0 10px 28px rgba(0,0,0,.08);
-    }
-    article.card.listing:hover{ transform: translateY(-6px); border-color: rgba(16,185,129,.3); box-shadow:0 16px 42px rgba(0,0,0,.13);}
-    .listing-visual{
-      height: 220px; display:flex; align-items:center; justify-content:center; font-size:3rem; color:#fff; position:relative;
-      background: linear-gradient(135deg, var(--brand1), var(--brand3));
-    }
-    .listing-visual::after{
-      content:''; position:absolute; inset:0; background:linear-gradient(135deg, rgba(14,165,233,.85), rgba(16,185,129,.8));
-    }
-    .listing-visual span{ position:relative; z-index:1; text-shadow:0 4px 12px rgba(0,0,0,.3); }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3); }
+            50% { box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5); }
+        }
 
-    .listing-body{ padding:22px; }
-    .listing-head{ display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin-bottom:8px;}
-    .listing-title{ font-size:1.25rem; font-weight:900; color:var(--ink); line-height:1.25; }
-    .badge{ background: linear-gradient(135deg, var(--brand5), #7c3aed); color:#fff; padding:7px 12px; border-radius:999px; font-size:.7rem; font-weight:900; text-transform:uppercase; letter-spacing:.06em;}
-    .listing-desc{ color: #374151; font-size:.98rem; line-height:1.6; margin:10px 0 16px; }
-    .listing-meta{ display:flex; justify-content:space-between; align-items:center; padding-top:14px; border-top:2px solid #f3f4f6;}
-    .loc{ color:var(--brand1); font-weight:800; font-size:.9rem; }
-    .rating{ color:#b45309; font-weight:900; font-size:.95rem; }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    /* Modal */
-    .modal{ display:none; position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:1000; }
-    .modal[open]{ display:block; }
-    .dialog{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); background:#fff; border-radius:26px; padding:32px;
-      width:min(600px, calc(100% - 40px)); max-height:90vh; overflow:auto; border:2px solid rgba(255,255,255,.4); box-shadow:0 30px 60px rgba(0,0,0,.3);
-    }
-    .modal-header{ display:flex; justify-content:space-between; align-items:center; gap:12px; padding-bottom:16px; border-bottom:3px solid #f3f4f6; margin-bottom:18px;}
-    .modal-title{ font-size:1.6rem; font-weight:900; background: linear-gradient(135deg, var(--brand1), var(--brand3)); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
-    .close-btn{ background:none; border:none; font-size:28px; cursor:pointer; color:#6b7280; border-radius:8px; padding:4px; }
-    .close-btn:hover{ color:#ef4444; background:#fef2f2; }
+        .main-layout {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
 
-    .submit-btn{
-      background: linear-gradient(135deg, var(--brand3), #059669); color:#fff; border:none; padding:16px 18px; border-radius:14px; font-weight:900; width:100%;
-      box-shadow:0 8px 24px rgba(16,185,129,.28); text-transform:uppercase; letter-spacing:.03em;
-    }
+        .sidebar {
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+        }
 
-    /* Responsive */
-    @media (max-width: 1024px){
-      .layout{ grid-template-columns: 1fr; gap:24px; }
-      aside.sidebar{ position:static; }
-      .grid{ grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); }
-    }
-  </style>
+        .filter-card {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .filter-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .filter-card h3 {
+            color: #374151;
+            margin-bottom: 18px;
+            font-size: 1.2em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 18px;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+            background: white;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: rgba(248, 250, 252, 0.9);
+            border: 2px solid rgba(229, 231, 235, 0.8);
+            padding: 10px 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .filter-btn:hover {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-color: #10b981;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-color: #10b981;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .add-listing-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 18px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .add-listing-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.4);
+        }
+
+        .content-area {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 35px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #f3f4f6;
+        }
+
+        .results-count {
+            color: #6b7280;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+        }
+
+        .view-btn {
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            background: white;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .view-btn.active {
+            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            color: white;
+            border-color: #0ea5e9;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 28px;
+        }
+
+        .listings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .listing-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .listing-image {
+            height: 220px;
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5em;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .listing-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(16, 185, 129, 0.8));
+        }
+
+        .listing-image span {
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .listing-content {
+            padding: 28px;
+        }
+
+        .listing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .listing-title {
+            font-size: 1.4em;
+            font-weight: 800;
+            color: #111827;
+            line-height: 1.3;
+        }
+
+        .listing-category {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .listing-description {
+            color: #4b5563;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .listing-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 18px;
+            border-top: 2px solid #f3f4f6;
+        }
+
+        .listing-location {
+            color: #0ea5e9;
+            font-size: 14px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .rating {
+            color: #f59e0b;
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 28px;
+            padding: 40px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #f3f4f6;
+        }
+
+        .modal-header h2 {
+            color: #111827;
+            font-size: 1.8em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 32px;
+            cursor: pointer;
+            color: #9ca3af;
+            transition: all 0.3s ease;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        .close-btn:hover {
+            color: #ef4444;
+            background: #fef2f2;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #374151;
+            font-size: 15px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .form-group textarea {
+            height: 140px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+            background: white;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 16px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+        }
+
+        .no-results {
+            grid-column: 1/-1;
+            text-align: center;
+            padding: 80px 20px;
+            color: #6b7280;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .no-results h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #374151;
+            font-weight: 800;
+        }
+
+        .no-results p {
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 1024px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .sidebar {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 20px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .listings-grid {
+                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 25px 15px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-section .tagline {
+                font-size: 1.2em;
+            }
+            
+            .hero-section .subtitle {
+                font-size: 1em;
+            }
+            
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+            
+            .listings-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 30px 25px;
+                margin: 20px;
+                width: calc(100% - 40px);
+            }
+        }
+    </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
-  <header class="hero" role="banner">
-    <h1>Around The Rock</h1>
-    <p class="tagline">Know Guernsey Like a Local</p>
-    <p class="subtitle">From hidden restaurants to weekend markets, local gigs to trusted services — discover authentic island life and share your insider knowledge with the community.</p>
-    <button class="cta" type="button" id="openAddBtn">🚀 Share Your Local Knowledge</button>
-  </header>
-
-  <div class="container">
-    <div class="layout">
-      <aside class="sidebar" aria-label="Filters">
-        <section class="card" aria-labelledby="find-heading">
-          <h3 id="find-heading">🔍 Find Anything</h3>
-          <input class="search-input" id="searchInput" name="q" type="text" placeholder="Search food, events, services, activities…" autocomplete="off">
-        </section>
-
-        <section class="card" aria-labelledby="when-heading">
-          <h3 id="when-heading">📅 When?</h3>
-          <label class="visually-hidden" for="dateFilter">Date filter</label>
-          <select id="dateFilter" name="date">
-            <option value="all">Any time</option>
-            <option value="today">Today</option>
-            <option value="tomorrow">Tomorrow</option>
-            <option value="weekend">This Weekend</option>
-            <option value="week">This Week</option>
-            <option value="month">This Month</option>
-          </select>
-        </section>
-
-        <section class="card" aria-labelledby="cats-heading">
-          <h3 id="cats-heading">🎯 Categories</h3>
-          <div class="filter-buttons" role="tablist" aria-label="Categories">
-            <button class="filter-btn" data-category="all" aria-pressed="true">All</button>
-            <button class="filter-btn" data-category="food" aria-pressed="false">Food &amp; Drink</button>
-            <button class="filter-btn" data-category="events" aria-pressed="false">Events</button>
-            <button class="filter-btn" data-category="services" aria-pressed="false">Services</button>
-            <button class="filter-btn" data-category="activities" aria-pressed="false">Activities</button>
-            <button class="filter-btn" data-category="nightlife" aria-pressed="false">Nightlife</button>
-            <button class="filter-btn" data-category="families" aria-pressed="false">Families</button>
-            <button class="filter-btn" data-category="fitness" aria-pressed="false">Fitness</button>
-            <button class="filter-btn" data-category="shopping" aria-pressed="false">Shopping</button>
-            <button class="filter-btn" data-category="jobs" aria-pressed="false">Jobs</button>
-          </div>
-        </section>
-
-        <section class="card">
-          <button class="cta" type="button" id="openAddBtn2">✨ Share Something Amazing</button>
-        </section>
-      </aside>
-
-      <main id="main" class="content" role="main">
-        <div class="content-header">
-          <div class="results-count" id="resultsCount" aria-live="polite">Discover everything Guernsey has to offer</div>
-          <div class="view-toggle" role="group" aria-label="View toggle">
-            <button class="view-btn active" type="button" data-view="grid" aria-pressed="true" title="Grid view">⊞</button>
-            <button class="view-btn" type="button" data-view="list" aria-pressed="false" title="List view">☰</button>
-          </div>
-        </div>
-        <section id="listingsContainer" class="grid" aria-label="Listings"></section>
-      </main>
+    <div class="hero-section">
+        <h1>Island Insider</h1>
+        <div class="tagline">Know Guernsey Like a Local</div>
+        <div class="subtitle">From hidden restaurants to weekend markets, local gigs to trusted services - discover authentic island life and share your own insider knowledge with the community</div>
+        <button class="add-highlight" onclick="openAddModal()">🚀 Share Your Local Knowledge</button>
     </div>
-  </div>
 
-  <!-- Add Listing Modal -->
-  <div class="modal" id="addModal" role="dialog" aria-modal="true" aria-labelledby="addModalTitle" aria-describedby="addModalDesc">
-    <div class="dialog" tabindex="-1">
-      <div class="modal-header">
-        <h2 class="modal-title" id="addModalTitle">Share with the Island</h2>
-        <button class="close-btn" type="button" aria-label="Close">&times;</button>
-      </div>
-      <p id="addModalDesc" class="visually-hidden">Use this form to submit a listing to Around The Rock.</p>
+    <div class="container">
+        <div class="main-layout">
+            <div class="sidebar">
+                <div class="filter-card">
+                    <h3>🔍 Find Anything</h3>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search food, events, services, activities...">
+                </div>
 
-      <!-- Netlify-ready form (no backend required) -->
-      <form id="addListingForm" name="listing" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <input type="hidden" name="form-name" value="listing" />
-        <p hidden>
-          <label>Don’t fill this out: <input name="bot-field" /></label>
-        </p>
+                <div class="filter-card">
+                    <h3>📅 When?</h3>
+                    <select class="search-input" id="dateFilter">
+                        <option value="all">Any time</option>
+                        <option value="today">Today</option>
+                        <option value="tomorrow">Tomorrow</option>
+                        <option value="weekend">This Weekend</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                    </select>
+                </div>
 
-        <div class="card" style="padding:16px;">
-          <div class="form-group" style="margin-bottom:16px;">
-            <label for="listingName"><strong>What are you sharing?*</strong></label>
-            <input type="text" id="listingName" name="name" required placeholder="Restaurant, event, service, activity…">
-          </div>
+                <div class="filter-card">
+                    <h3>🎯 Categories</h3>
+                    <div class="filter-buttons">
+                        <div class="filter-btn active" data-category="all">All</div>
+                        <div class="filter-btn" data-category="food">Food & Drink</div>
+                        <div class="filter-btn" data-category="events">Events</div>
+                        <div class="filter-btn" data-category="services">Services</div>
+                        <div class="filter-btn" data-category="activities">Activities</div>
+                        <div class="filter-btn" data-category="nightlife">Nightlife</div>
+                        <div class="filter-btn" data-category="families">Families</div>
+                        <div class="filter-btn" data-category="fitness">Fitness</div>
+                        <div class="filter-btn" data-category="shopping">Shopping</div>
+                        <div class="filter-btn" data-category="jobs">Jobs</div>
+                    </div>
+                </div>
 
-          <div class="form-group" style="margin-bottom:16px;">
-            <label for="listingCategory"><strong>Category*</strong></label>
-            <select id="listingCategory" name="category" required>
-              <option value="">Choose the best fit</option>
-              <option value="food">Food &amp; Drink</option>
-              <option value="events">Event</option>
-              <option value="services">Service</option>
-              <option value="activities">Activity</option>
-              <option value="nightlife">Nightlife</option>
-              <option value="families">Family Activity</option>
-              <option value="fitness">Fitness &amp; Wellbeing</option>
-              <option value="shopping">Shop/Market</option>
-              <option value="jobs">Job Opportunity</option>
-              <option value="volunteer">Volunteer Opportunity</option>
-            </select>
-          </div>
+                <div class="filter-card">
+                    <button class="add-listing-btn" onclick="openAddModal()">
+                        ✨ Share Something Amazing
+                    </button>
+                </div>
+            </div>
 
-          <div class="form-group" style="margin-bottom:16px;">
-            <label for="listingDescription"><strong>Tell us about it*</strong></label>
-            <textarea id="listingDescription" name="description" required placeholder="What makes this special? Why should people know about it?"></textarea>
-          </div>
-
-          <div class="form-group" style="margin-bottom:16px;">
-            <label for="listingLocation"><strong>Location</strong></label>
-            <input type="text" id="listingLocation" name="location" placeholder="Where in Guernsey?">
-          </div>
-
-          <div class="form-group" style="margin-bottom:16px;">
-            <label for="listingContact"><strong>Contact Details</strong></label>
-            <input type="text" id="listingContact" name="contact" placeholder="Phone, email, website, socials">
-          </div>
-
-          <div class="form-group" style="margin-bottom:16px;">
-            <label for="listingDate"><strong>Date (if event)</strong></label>
-            <input type="text" id="listingDate" name="date" placeholder="YYYY-MM-DD or details">
-          </div>
-
-          <label style="display:flex; gap:.5rem; align-items:center; margin:.25rem 0 1rem;">
-            <input type="checkbox" required name="consent"> I agree to be contacted about this listing.
-          </label>
-
-          <button class="submit-btn" type="submit">Add to Around The Rock</button>
+            <div class="content-area">
+                <div class="content-header">
+                    <div class="results-count" id="resultsCount">Discover everything Guernsey has to offer</div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" onclick="toggleView('grid')">⊞</button>
+                        <button class="view-btn" onclick="toggleView('list')">☰</button>
+                    </div>
+                </div>
+                <div class="listings-grid" id="listingsContainer">
+                    <!-- Listings will be populated here -->
+                </div>
+            </div>
         </div>
-      </form>
     </div>
-  </div>
 
-  <script>
-    // ---------- Utilities ----------
-    const $ = (sel, root=document) => root.querySelector(sel);
-    const $$ = (sel, root=document) => Array.from(root.querySelectorAll(sel));
+    <!-- Add Listing Modal -->
+    <div class="modal" id="addModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Share with the Island</h2>
+                <button class="close-btn" onclick="closeAddModal()">&times;</button>
+            </div>
+            <form id="addListingForm">
+                <div class="form-group">
+                    <label>What are you sharing?*</label>
+                    <input type="text" id="listingName" required placeholder="Restaurant, event, service, activity...">
+                </div>
+                <div class="form-group">
+                    <label>Category*</label>
+                    <select id="listingCategory" required>
+                        <option value="">Choose the best fit</option>
+                        <option value="food">Food & Drink</option>
+                        <option value="events">Event</option>
+                        <option value="services">Service (handyman, babysitter, etc.)</option>
+                        <option value="activities">Activity</option>
+                        <option value="nightlife">Nightlife</option>
+                        <option value="families">Family Activity</option>
+                        <option value="fitness">Fitness & Wellbeing</option>
+                        <option value="shopping">Shop/Market</option>
+                        <option value="jobs">Job Opportunity</option>
+                        <option value="volunteer">Volunteer Opportunity</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Tell us about it*</label>
+                    <textarea id="listingDescription" required placeholder="What makes this special? Why should people know about it?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Location</label>
+                    <input type="text" id="listingLocation" placeholder="Where in Guernsey?">
+                </div>
+                <div class="form-group">
+                    <label>Contact Details</label>
+                    <input type="text" id="listingContact" placeholder="How can people get in touch or find out more?">
+                </div>
+                <button type="submit" class="submit-btn">Add to Island Insider</button>
+            </form>
+        </div>
+    </div>
 
-    // Date helpers
-    function getNextWeekday(target){ // 0=Sun..6=Sat
-      const d = new Date();
-      const diff = (target + 7 - d.getDay()) % 7 || 7;
-      d.setDate(d.getDate() + diff);
-      d.setHours(9,0,0,0);
-      return d.toISOString();
-    }
-    const getNextTuesday = () => getNextWeekday(2);
-    const getNextThursday = () => getNextWeekday(4);
-    const getNextSaturday = () => getNextWeekday(6);
-
-    // ---------- Sample Data ----------
-    const listings = [
-      { id:1, name:"Castle Cornet", category:"activities", description:"Historic castle guarding St Peter Port harbour for 800 years. Explore medieval rooms, cannon firing ceremonies, and stunning harbor views.", location:"St Peter Port", contact:"Open daily 10am–5pm", rating:4.8, icon:"🏰", date:null },
-      { id:2, name:"The Rockmount", category:"food", description:"Award-winning gastropub with sea views and locally sourced ingredients. Famous for Guernsey beef and fresh seafood.", location:"St Martin", contact:"01481 235544", rating:4.7, icon:"🍽️", date:null },
-      { id:3, name:"Live Music at Liberation Brewery", category:"nightlife", description:"Local bands and acoustic sessions every Thursday. Great craft beers and relaxed atmosphere in the heart of St Peter Port.", location:"St Peter Port", contact:"Thursdays 8pm", rating:4.5, icon:"🎵", date:getNextThursday() },
-      { id:4, name:"Reliable Island Handyman", category:"services", description:"Experienced local handyman for home repairs, garden maintenance, and odd jobs. Fully insured and island references available.", location:"Islandwide", contact:"Call Tom: 07781 234567", rating:4.9, icon:"🔨", date:null },
-      { id:5, name:"Petit Bot Bay Coastal Walk", category:"activities", description:"Spectacular cliff path with hidden coves and dramatic sea views. Perfect for sunset walks and wildlife spotting.", location:"South Coast", contact:"Free access", rating:4.8, icon:"🥾", date:null },
-      { id:6, name:"Saturday Farmers Market", category:"shopping", description:"Fresh local produce, artisan bread, island honey, and handmade crafts. Meet local growers and makers every Saturday.", location:"St Peter Port", contact:"Saturdays 9am–2pm", rating:4.6, icon:"🥕", date:getNextSaturday() },
-      { id:7, name:"Kids Adventure Club", category:"families", description:"Forest adventures and beach exploration for children 5–12. Professional guides and all equipment provided.", location:"Various locations", contact:"Book: 01481 345678", rating:4.9, icon:"🧒", date:null },
-      { id:8, name:"Sunrise Yoga Sessions", category:"fitness", description:"Peaceful morning yoga on Vazon Beach. All levels welcome. Watch the sunrise while finding your zen.", location:"Vazon Bay", contact:"Tuesdays & Fridays 7am", rating:4.7, icon:"🧘", date:getNextTuesday() }
-    ];
-
-    // ---------- State ----------
-    let currentFilter = 'all';
-    let currentSearch = '';
-    let currentDateFilter = 'all';
-    let currentView = 'grid';
-
-    // ---------- Render ----------
-    function renderListings(){
-      const container = $('#listingsContainer');
-      const count = $('#resultsCount');
-      let filtered = listings.slice();
-
-      // Category
-      if (currentFilter !== 'all') {
-        filtered = filtered.filter(l => l.category === currentFilter);
-      }
-      // Search
-      if (currentSearch.trim()) {
-        const q = currentSearch.toLowerCase();
-        filtered = filtered.filter(l =>
-          l.name.toLowerCase().includes(q) ||
-          l.description.toLowerCase().includes(q) ||
-          (l.location && l.location.toLowerCase().includes(q))
-        );
-      }
-      // Date filter
-      if (currentDateFilter !== 'all') {
-        const now = new Date();
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        const tomorrow = new Date(today); tomorrow.setDate(today.getDate() + 1);
-
-        filtered = filtered.filter(l => {
-          if (!l.date) return false;
-          const d = new Date(l.date);
-          switch (currentDateFilter) {
-            case 'today': return d.toDateString() === today.toDateString();
-            case 'tomorrow': return d.toDateString() === tomorrow.toDateString();
-            case 'weekend': {
-              const saturday = new Date(today);
-              saturday.setDate(today.getDate() + ((6 - today.getDay() + 7) % 7));
-              const sundayEnd = new Date(saturday);
-              sundayEnd.setDate(saturday.getDate() + 1);
-              sundayEnd.setHours(23,59,59,999);
-              return d >= saturday && d <= sundayEnd;
+    <script>
+        // Enhanced sample data covering more categories
+        let listings = [
+            {
+                id: 1,
+                name: "Castle Cornet",
+                category: "activities",
+                description: "Historic castle guarding St Peter Port harbour for 800 years. Explore medieval rooms, cannon firing ceremonies, and stunning harbor views.",
+                location: "St Peter Port",
+                contact: "Open daily 10am-5pm",
+                rating: 4.8,
+                icon: "🏰",
+                date: null
+            },
+            {
+                id: 2,
+                name: "The Rockmount",
+                category: "food",
+                description: "Award-winning gastropub with sea views and locally sourced ingredients. Famous for their Guernsey beef and fresh seafood.",
+                location: "St Martin",
+                contact: "01481 235544",
+                rating: 4.7,
+                icon: "🍽️",
+                date: null
+            },
+            {
+                id: 3,
+                name: "Live Music at Liberation Brewery",
+                category: "nightlife",
+                description: "Local bands and acoustic sessions every Thursday. Great craft beers and relaxed atmosphere in the heart of St Peter Port.",
+                location: "St Peter Port",
+                contact: "Thursdays 8pm",
+                rating: 4.5,
+                icon: "🎵",
+                date: getNextThursday()
+            },
+            {
+                id: 4,
+                name: "Reliable Island Handyman",
+                category: "services",
+                description: "Experienced local handyman for home repairs, garden maintenance, and odd jobs. Fully insured and island references available.",
+                location: "Islandwide",
+                contact: "Call Tom: 07781 234567",
+                rating: 4.9,
+                icon: "🔨",
+                date: null
+            },
+            {
+                id: 5,
+                name: "Petit Bot Bay Coastal Walk",
+                category: "activities",
+                description: "Spectacular cliff path with hidden coves and dramatic sea views. Perfect for sunset walks and wildlife spotting.",
+                location: "South Coast",
+                contact: "Free access",
+                rating: 4.8,
+                icon: "🥾",
+                date: null
+            },
+            {
+                id: 6,
+                name: "Saturday Farmers Market",
+                category: "shopping",
+                description: "Fresh local produce, artisan bread, island honey, and handmade crafts. Meet local growers and makers every Saturday.",
+                location: "St Peter Port",
+                contact: "Saturdays 9am-2pm",
+                rating: 4.6,
+                icon: "🥕",
+                date: getNextSaturday()
+            },
+            {
+                id: 7,
+                name: "Kids Adventure Club",
+                category: "families",
+                description: "Forest adventures and beach exploration for children 5-12. Professional guides and all equipment provided.",
+                location: "Various locations",
+                contact: "Book: 01481 345678",
+                rating: 4.9,
+                icon: "🧒",
+                date: null
+            },
+            {
+                id: 8,
+                name: "Sunrise Yoga Sessions",
+                category: "fitness",
+                description: "Peaceful morning yoga on Vazon Beach. All levels welcome. Watch the sunrise while finding your zen.",
+                location: "Vazon Bay",
+                contact: "Tuesdays & Fridays 7am",
+                rating: 4.7,
+                icon: "🧘",
+                date: getNextTuesday()
             }
-            case 'week': {
-              const weekEnd = new Date(today);
-              weekEnd.setDate(today.getDate() + 7);
-              return d >= today && d <= weekEnd;
+        ];
+
+        let currentFilter = 'all';
+        let currentSearch = '';
+        let currentDateFilter = 'all';
+        let currentView = 'grid';
+
+        function renderListings() {
+            const container = document.getElementById('listingsContainer');
+            const resultsCount = document.getElementById('resultsCount');
+            let filteredListings = listings;
+
+            // Apply category filter
+            if (currentFilter !== 'all') {
+                filteredListings = filteredListings.filter(listing => listing.category === currentFilter);
             }
-            case 'month': {
-              const monthEnd = new Date(today);
-              monthEnd.setMonth(today.getMonth() + 1);
-              return d >= today && d <= monthEnd;
-            }
-          }
-        });
-      }
 
-      // View
-      container.className = currentView === 'grid' ? 'grid' : 'list';
-
-      // DOM
-      container.innerHTML = '';
-      if (!filtered.length) {
-        const empty = document.createElement('div');
-        empty.className = 'card';
-        empty.innerHTML = `
-          <div style="text-align:center; padding:60px 20px; color:#374151;">
-            <h3 style="margin:0 0 8px; font-size:1.4rem; font-weight:900;">No results (yet)</h3>
-            <p style="margin:0;">Try a different category or time — or <button type="button" class="cta" id="openAddBtnEmpty" style="margin-left:.25rem;">share a listing</button>.</p>
-          </div>`;
-        container.appendChild(empty);
-        // wire empty state button
-        $('#openAddBtnEmpty')?.addEventListener('click', openAddModal);
-      } else {
-        for (const l of filtered) {
-          const card = document.createElement('article');
-          card.className = 'card listing';
-          card.setAttribute('tabindex','0');
-          card.innerHTML = `
-            <div class="listing-visual" aria-hidden="true"><span>${l.icon || '📍'}</span></div>
-            <div class="listing-body">
-              <div class="listing-head">
-                <h3 class="listing-title">${escapeHTML(l.name)}</h3>
-                <span class="badge">${escapeHTML(labelForCategory(l.category))}</span>
-              </div>
-              <p class="listing-desc">${escapeHTML(l.description)}</p>
-              <div class="listing-meta">
-                <div class="loc">📍 ${escapeHTML(l.location || 'Guernsey')}</div>
-                <div class="rating">★ ${Number(l.rating || 0).toFixed(1)}</div>
-              </div>
-            </div>`;
-          container.appendChild(card);
-        }
-      }
-      count.textContent = `${filtered.length} result${filtered.length===1?'':'s'}`;
-    }
-
-    function labelForCategory(cat){
-      const map = {
-        food:'Food & Drink', events:'Events', services:'Services', activities:'Activities',
-        nightlife:'Nightlife', families:'Families', fitness:'Fitness', shopping:'Shopping', jobs:'Jobs', volunteer:'Volunteer'
-      };
-      return map[cat] || 'General';
-    }
-
-    // Basic XSS safety for demo (server-side sanitization still required in production)
-    function escapeHTML(str=''){
-      return String(str)
-        .replaceAll('&','&amp;')
-        .replaceAll('<','&lt;')
-        .replaceAll('>','&gt;')
-        .replaceAll('"','&quot;')
-        .replaceAll("'",'&#039;');
-    }
-
-    // ---------- Events ----------
-    // Search
-    $('#searchInput').addEventListener('input', (e)=>{ currentSearch = e.target.value; renderListings(); });
-
-    // Date filter
-    $('#dateFilter').addEventListener('change', (e)=>{ currentDateFilter = e.target.value; renderListings(); });
-
-    // Category buttons
-    $$('.filter-btn').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        $$('.filter-btn').forEach(b=> b.setAttribute('aria-pressed','false'));
-        btn.setAttribute('aria-pressed','true');
-        currentFilter = btn.dataset.category || 'all';
-        renderListings();
-      });
-    });
-
-    // View toggle
-    $$('.view-btn').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        $$('.view-btn').forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
-        btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
-        currentView = btn.dataset.view;
-        renderListings();
-      });
-    });
-
-    // ---------- Modal (a11y with focus trap) ----------
-    const modal = $('#addModal');
-    const dialog = modal.querySelector('.dialog');
-    const openers = [$('#openAddBtn'), $('#openAddBtn2')].filter(Boolean);
-    const closer = modal.querySelector('.close-btn');
-    let lastFocused;
-
-    function openAddModal(){
-      lastFocused = document.activeElement;
-      modal.setAttribute('open','');
-      dialog.setAttribute('tabindex','-1');
-      dialog.focus();
-      document.addEventListener('keydown', onKeydown);
-      document.addEventListener('focus', trapFocus, true);
-    }
-    function closeAddModal(){
-      modal.removeAttribute('open');
-      document.removeEventListener('keydown', onKeydown);
-      document.removeEventListener('focus', trapFocus, true);
-      if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
-    }
-    function onKeydown(e){
-      if (e.key === 'Escape') closeAddModal();
-      if (e.key === 'Tab') trapTabKey(e);
-    }
-    function trapFocus(e){
-      if (!modal.hasAttribute('open')) return;
-      if (!modal.contains(e.target)) {
-        e.stopPropagation();
-        dialog.focus();
-      }
-    }
-    function trapTabKey(e){
-      const focusables = $$('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])', dialog)
-        .filter(el => !el.hasAttribute('disabled'));
-      if (!focusables.length) return;
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-
-    openers.forEach(b=> b.addEventListener('click', openAddModal));
-    closer.addEventListener('click', closeAddModal);
-    modal.addEventListener('click', (e)=>{ if (e.target === modal) closeAddModal(); });
-
-    // ---------- Form (client-side enhancement only; Netlify handles submission) ----------
-    $('#addListingForm').addEventListener('submit', (e)=>{
-      // Let Netlify handle it; you can add custom UX here if you like.
-      // Example: show a quick toast after submit success via Netlify redirect or JS.
-    });
-
-    // Initial render
-    renderListings();
-  </script>
-</body>
-</html>
+            // Apply date filter
+            if (currentDateFilter !== 'all') {
+                const now = new Date();
+                const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                const tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                
+                filteredListings = filteredListings.filter(listing => {
+                    if (!listing.date) return currentDateFilter === 'all';
+                    
+                    const listingDate = new Date(listing.date);
+                    
+                    switch(currentDateFilter) {
+                        case 'today':
+                            return listingDate.toDateString() === today.toDateString();
+                        case 'tomorrow':
+                            return listingDate.toDateString() === tomorrow.toDateString();
+                        case 'weekend':
+                            const weekendStart = new Date(today);
+                            weekendStart.setDate(today.getDate() + (6 - today.getDay()));
+                            const weekendEnd = new Date(weekendStart);
+                            weekendEnd.setDate(weekendStart.getDate() + 1);
+                            return listingDate >= weekendStart && listingDate <= weekendEnd;
+                        case 'week':
+                            const weekEnd = new Date(today);
+                            weekEnd.setDate(today.getDate() + 7);
+                            return listingDate >= today && listingDate <= weekEnd;
+                        case 'month':
+                            const monthEnd = new Date(today);
+                            monthEnd.setMonth(today.getMonth() + 1);
