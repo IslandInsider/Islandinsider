@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Around The Rock - Your Complete Guernsey Guide</title>
+    <title>Island Insider - Discover Authentic Guernsey</title>
+    
+    <!-- Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dkmvRSVkLVoXX4&callback=initMap"></script>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+    
     <style>
         * {
             margin: 0;
@@ -12,165 +25,223 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 25%, #10b981 50%, #3b82f6 75%, #8b5cf6 100%);
-            min-height: 100vh;
-            position: relative;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #ffffff;
+            color: #1a202c;
+            line-height: 1.6;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1580919350391-c8e1b3e4f5c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80') center/cover;
-            opacity: 0.15;
-            z-index: -2;
-        }
-
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.9) 0%, rgba(16, 185, 129, 0.8) 100%);
-            z-index: -1;
-        }
-
+        /* Hero Section */
         .hero-section {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            padding: 40px 20px;
+            background: #f8f9fa;
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            border-bottom: 4px solid #10b981;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            color: #333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-section h1 {
             font-size: 3.5rem;
-            background: linear-gradient(135deg, #0ea5e9, #10b981);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-            font-weight: 900;
-            letter-spacing: -2px;
-        }
-
-        .hero-section .tagline {
-            font-size: 1.4em;
-            color: #374151;
-            margin-bottom: 15px;
             font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            color: #17a2b8;
+            text-shadow: none;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
         }
 
-        .hero-section .subtitle {
-            font-size: 1.1em;
-            color: #6b7280;
-            max-width: 800px;
-            margin: 0 auto 20px;
+        .hero-tagline {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+            opacity: 1;
+            color: #495057;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 1;
+            font-weight: 400;
             line-height: 1.6;
+            color: #495057;
         }
 
-        .add-highlight {
-            background: linear-gradient(135deg, #10b981, #059669);
+        .hero-cta {
+            background: #17a2b8;
             color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1em;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            padding: 18px 40px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
         }
 
-        .add-highlight:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(23, 162, 184, 0.4);
+            background: #138496;
         }
 
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3); }
-            50% { box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5); }
-        }
-
+        /* Main Content */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        .main-layout {
+        .main-grid {
             display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 30px;
-            margin-bottom: 50px;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+            margin-top: 40px;
+            position: relative;
+            z-index: 10;
         }
 
+        /* Sidebar */
         .sidebar {
-            position: sticky;
-            top: 20px;
-            height: fit-content;
-        }
-
-        .filter-card {
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(20px);
+            background: white;
             border-radius: 24px;
             padding: 28px;
-            margin-bottom: 20px;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.3);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
             transition: all 0.3s ease;
         }
 
-        .filter-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.15);
+        .sidebar-section {
+            margin-bottom: 35px;
         }
 
-        .filter-card h3 {
-            color: #374151;
-            margin-bottom: 18px;
-            font-size: 1.2em;
-            font-weight: 700;
+        .sidebar-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-title {
+            color: #17a2b8;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e9ecef;
+            text-transform: none;
+            letter-spacing: 0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+        }
+
+        .search-section {
+            background: #17a2b8;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 35px;
+        }
+
+        .search-section .sidebar-title {
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 0;
+            border-bottom: none;
+            text-transform: none;
+            letter-spacing: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .search-input {
             width: 100%;
             padding: 15px 18px;
-            border: 2px solid #e5e7eb;
-            border-radius: 16px;
+            border: 2px solid #17a2b8;
+            border-radius: 8px;
             font-size: 16px;
             transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
+            background: white;
+            color: #333;
             font-weight: 500;
+        }
+
+        .search-section .search-input {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .search-section .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .search-section .search-input:focus {
+            outline: none;
+            border-color: white;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: #999;
         }
 
         .search-input:focus {
             outline: none;
-            border-color: #10b981;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
-            background: white;
+            border-color: #138496;
+            box-shadow: 0 0 0 4px rgba(23, 162, 184, 0.1);
         }
 
-        .filter-buttons {
+        .date-select {
+            width: 100%;
+            padding: 15px 18px;
+            border: 2px solid #17a2b8;
+            border-radius: 8px;
+            font-size: 16px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .date-select:focus {
+            outline: none;
+            border-color: #138496;
+            box-shadow: 0 0 0 4px rgba(23, 162, 184, 0.1);
+        }
+
+        .date-select option {
+            background: white;
+            color: #374151;
+        }
+
+        .category-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
         }
 
-        .filter-btn {
+        .category-btn {
             background: rgba(248, 250, 252, 0.9);
             border: 2px solid rgba(229, 231, 235, 0.8);
             padding: 10px 18px;
@@ -182,45 +253,62 @@
             color: #374151;
         }
 
-        .filter-btn:hover {
-            background: linear-gradient(135deg, #10b981, #059669);
+        .category-btn:hover {
+            background: #17a2b8;
             color: white;
-            border-color: #10b981;
+            border-color: #17a2b8;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+            box-shadow: 0 8px 20px rgba(23, 162, 184, 0.3);
         }
 
-        .filter-btn.active {
-            background: linear-gradient(135deg, #10b981, #059669);
+        .category-btn.active {
+            background: #17a2b8;
             color: white;
-            border-color: #10b981;
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+            border-color: #17a2b8;
+            box-shadow: 0 6px 20px rgba(23, 162, 184, 0.3);
         }
 
-        .add-listing-btn {
-            width: 100%;
-            background: linear-gradient(135deg, #f59e0b, #d97706);
+        .add-section {
+            background: linear-gradient(135deg, #e6fffa, #b2f5ea);
+            border: 2px solid #81e6d9;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .add-section h3 {
+            color: #2c7a7b;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .add-section p {
+            color: #319795;
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .add-btn {
+            background: #17a2b8;
             color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
             border: none;
-            padding: 20px;
-            border-radius: 18px;
-            font-size: 17px;
-            font-weight: 700;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .add-listing-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.4);
+        .add-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
+            background: #138496;
         }
 
+        /* Main Content Area */
         .content-area {
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(20px);
+            background: white;
             border-radius: 24px;
             padding: 35px;
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
@@ -236,13 +324,20 @@
             border-bottom: 3px solid #f3f4f6;
         }
 
-        .results-count {
-            color: #6b7280;
-            font-size: 15px;
-            font-weight: 600;
+        .content-title {
+            color: #495057;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 5px;
         }
 
-        .view-toggle {
+        .results-count {
+            color: #6c757d;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        .view-controls {
             display: flex;
             gap: 8px;
         }
@@ -259,12 +354,13 @@
         }
 
         .view-btn.active {
-            background: linear-gradient(135deg, #0ea5e9, #06b6d4);
+            background: #17a2b8;
             color: white;
-            border-color: #0ea5e9;
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+            border-color: #17a2b8;
+            box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3);
         }
 
+        /* Listings */
         .listings-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -291,12 +387,12 @@
         .listing-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-            border-color: rgba(16, 185, 129, 0.3);
+            border-color: rgba(23, 162, 184, 0.3);
         }
 
         .listing-image {
             height: 220px;
-            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            background: linear-gradient(135deg, #17a2b8, #20c997);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -313,7 +409,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(16, 185, 129, 0.8));
+            background: linear-gradient(135deg, rgba(23, 162, 184, 0.9), rgba(32, 201, 151, 0.8));
         }
 
         .listing-image span {
@@ -322,45 +418,52 @@
             text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
+        .category-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #2d3748;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .listing-content {
             padding: 28px;
         }
 
-        .listing-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-
         .listing-title {
             font-size: 1.4em;
-            font-weight: 800;
-            color: #111827;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 15px;
             line-height: 1.3;
         }
 
-        .listing-category {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
-        }
-
         .listing-description {
-            color: #4b5563;
+            color: #666;
             font-size: 15px;
             line-height: 1.7;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .listing-details {
+            font-size: 0.85rem;
+            color: #17a2b8;
             margin-bottom: 20px;
             font-weight: 500;
         }
 
-        .listing-meta {
+        .listing-detail {
+            margin-bottom: 4px;
+        }
+
+        .listing-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -369,23 +472,108 @@
         }
 
         .listing-location {
-            color: #0ea5e9;
+            color: #17a2b8;
             font-size: 14px;
-            font-weight: 700;
+            font-weight: 600;
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .rating {
+        .listing-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stars {
             color: #f59e0b;
             font-weight: 700;
             font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
         }
 
+        /* Rating Section */
+        .rating-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .rating-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 2px;
+        }
+
+        .star {
+            color: #e2e8f0;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star:hover,
+        .star.active {
+            color: #ed8936;
+        }
+
+        .recommend-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .recommend-btn {
+            padding: 6px 12px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .recommend-btn.yes:hover,
+        .recommend-btn.yes.active {
+            background: #48bb78;
+            color: white;
+            border-color: #48bb78;
+        }
+
+        .recommend-btn.no:hover,
+        .recommend-btn.no.active {
+            background: #f56565;
+            color: white;
+            border-color: #f56565;
+        }
+
+        /* Map */
+        #map {
+            width: 100%;
+            height: 600px;
+            border-radius: 12px;
+            display: none;
+            border: 2px solid #17a2b8;
+        }
+
+        .map-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: #17a2b8;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: #f8f9fa;
+        }
+
+        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -393,235 +581,213 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 1000;
-            animation: fadeIn 0.3s ease-out;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
         }
 
         .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             background: white;
-            border-radius: 28px;
-            padding: 40px;
+            border-radius: 12px;
+            padding: 30px;
             width: 90%;
-            max-width: 600px;
+            max-width: 500px;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 3px solid #f3f4f6;
+            margin-bottom: 1.5rem;
         }
 
-        .modal-header h2 {
-            color: #111827;
-            font-size: 1.8em;
-            font-weight: 800;
-            background: linear-gradient(135deg, #0ea5e9, #10b981);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #1f2937;
         }
 
         .close-btn {
             background: none;
             border: none;
-            font-size: 32px;
+            font-size: 1.5rem;
             cursor: pointer;
-            color: #9ca3af;
-            transition: all 0.3s ease;
-            padding: 5px;
-            border-radius: 50%;
+            color: #6b7280;
+            padding: 0.25rem;
         }
 
         .close-btn:hover {
             color: #ef4444;
-            background: #fef2f2;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 1rem;
         }
 
-        .form-group label {
+        .form-label {
             display: block;
-            margin-bottom: 10px;
-            font-weight: 700;
+            font-size: 0.875rem;
+            font-weight: 600;
             color: #374151;
-            font-size: 15px;
+            margin-bottom: 0.5rem;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
+        .form-input,
+        .form-select,
+        .form-textarea {
             width: 100%;
-            padding: 16px 20px;
-            border: 2px solid #e5e7eb;
-            border-radius: 16px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            transition: all 0.15s ease;
         }
 
-        .form-group textarea {
-            height: 140px;
+        .form-textarea {
+            height: 100px;
             resize: vertical;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
             outline: none;
-            border-color: #10b981;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
-            background: white;
+            border-color: #17a2b8;
+            box-shadow: 0 0 0 3px rgba(23, 162, 184, 0.1);
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, #10b981, #059669);
+            width: 100%;
+            background: #17a2b8;
             color: white;
             border: none;
-            padding: 20px 40px;
-            border-radius: 16px;
-            font-size: 17px;
-            font-weight: 700;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            width: 100%;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            transition: all 0.15s ease;
         }
 
         .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+            background: #138496;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #17a2b8;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 6px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            z-index: 1001;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.3s ease;
+        }
+
+        .success-message.show {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .no-results {
-            grid-column: 1/-1;
             text-align: center;
-            padding: 80px 20px;
+            padding: 3rem 1rem;
             color: #6b7280;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
         }
 
         .no-results h3 {
-            font-size: 1.8em;
-            margin-bottom: 15px;
+            font-size: 1.25rem;
+            font-weight: 600;
             color: #374151;
-            font-weight: 800;
+            margin-bottom: 0.5rem;
         }
 
-        .no-results p {
-            font-size: 1.1em;
-            font-weight: 500;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
+        /* Responsive */
         @media (max-width: 1024px) {
-            .main-layout {
+            .main-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
+                gap: 1.5rem;
+                margin-top: 40px;
             }
             
             .sidebar {
                 position: static;
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-                gap: 20px;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
             }
             
             .hero-section h1 {
                 font-size: 2.5rem;
             }
-            
-            .listings-grid {
-                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-                gap: 25px;
-            }
         }
 
         @media (max-width: 768px) {
             .hero-section {
-                padding: 25px 15px;
+                min-height: 40vh;
+                padding: 2rem 0;
             }
             
             .hero-section h1 {
                 font-size: 2rem;
             }
             
-            .hero-section .tagline {
-                font-size: 1.2em;
-            }
-            
-            .hero-section .subtitle {
-                font-size: 1em;
-            }
-            
-            .sidebar {
-                grid-template-columns: 1fr;
+            .hero-tagline {
+                font-size: 1.125rem;
             }
             
             .listings-grid {
                 grid-template-columns: 1fr;
             }
             
-            .modal-content {
-                padding: 30px 25px;
-                margin: 20px;
-                width: calc(100% - 40px);
+            .content-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .sidebar {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="hero-section">
-        <h1>Island Insider</h1>
-        <div class="tagline">Know Guernsey Like a Local</div>
-        <div class="subtitle">From hidden restaurants to weekend markets, local gigs to trusted services - discover authentic island life and share your own insider knowledge with the community</div>
-        <button class="add-highlight" onclick="openAddModal()">🚀 Share Your Local Knowledge</button>
-    </div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Island Insider</h1>
+            <p class="hero-tagline">Discover authentic Guernsey</p>
+            <p class="hero-subtitle">From award-winning restaurants to weekend markets, local gigs to trusted services - explore the island through the eyes of those who know it best</p>
+            <button class="hero-cta" onclick="openAddModal()">🚀 Share Your Local Knowledge</button>
+        </div>
+    </section>
 
+    <!-- Main Content -->
     <div class="container">
-        <div class="main-layout">
-            <div class="sidebar">
-                <div class="filter-card">
-                    <h3>🔍 Find Anything</h3>
+        <div class="main-grid">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="search-section">
+                    <h3 class="sidebar-title">🔍 Find Anything</h3>
                     <input type="text" class="search-input" id="searchInput" placeholder="Search food, events, services, activities...">
                 </div>
 
-                <div class="filter-card">
-                    <h3>📅 When?</h3>
-                    <select class="search-input" id="dateFilter">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">📅 When</h3>
+                    <select class="date-select" id="dateFilter">
                         <option value="all">Any time</option>
                         <option value="today">Today</option>
                         <option value="tomorrow">Tomorrow</option>
@@ -631,198 +797,424 @@
                     </select>
                 </div>
 
-                <div class="filter-card">
-                    <h3>🎯 Categories</h3>
-                    <div class="filter-buttons">
-                        <div class="filter-btn active" data-category="all">All</div>
-                        <div class="filter-btn" data-category="food">Food & Drink</div>
-                        <div class="filter-btn" data-category="events">Events</div>
-                        <div class="filter-btn" data-category="services">Services</div>
-                        <div class="filter-btn" data-category="activities">Activities</div>
-                        <div class="filter-btn" data-category="nightlife">Nightlife</div>
-                        <div class="filter-btn" data-category="families">Families</div>
-                        <div class="filter-btn" data-category="fitness">Fitness</div>
-                        <div class="filter-btn" data-category="shopping">Shopping</div>
-                        <div class="filter-btn" data-category="jobs">Jobs</div>
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">🎯 Categories</h3>
+                    <div class="category-buttons">
+                        <button class="category-btn active" data-category="all">All Categories</button>
+                        <button class="category-btn" data-category="food">Food & Drinks</button>
+                        <button class="category-btn" data-category="events">Events</button>
+                        <button class="category-btn" data-category="kids">Kids Activities</button>
+                        <button class="category-btn" data-category="fitness">Fitness & Wellbeing</button>
+                        <button class="category-btn" data-category="pets">Pet Friendly</button>
+                        <button class="category-btn" data-category="attractions">Attractions</button>
+                        <button class="category-btn" data-category="sporting">Sporting Events</button>
+                        <button class="category-btn" data-category="hedgeveg">Hedge Veg</button>
                     </div>
                 </div>
 
-                <div class="filter-card">
-                    <button class="add-listing-btn" onclick="openAddModal()">
-                        ✨ Share Something Amazing
-                    </button>
+                <div class="add-section">
+                    <h3>Know Something Special?</h3>
+                    <p>Share your favorite spots and help others discover authentic Guernsey</p>
+                    <button class="add-btn" onclick="openAddModal()">Add a Listing</button>
                 </div>
-            </div>
+            </aside>
 
-            <div class="content-area">
+            <!-- Content Area -->
+            <main class="content-area">
                 <div class="content-header">
-                    <div class="results-count" id="resultsCount">Discover everything Guernsey has to offer</div>
-                    <div class="view-toggle">
-                        <button class="view-btn active" onclick="toggleView('grid')">⊞</button>
-                        <button class="view-btn" onclick="toggleView('list')">☰</button>
+                    <div>
+                        <h2 class="content-title">Discover Guernsey</h2>
+                        <p class="results-count" id="resultsCount">Explore authentic local experiences</p>
+                    </div>
+                    <div class="view-controls">
+                        <button class="view-btn active" onclick="toggleView('grid')" title="Grid View">⊞</button>
+                        <button class="view-btn" onclick="toggleView('list')" title="List View">☰</button>
+                        <button class="view-btn" onclick="toggleView('map')" title="Map View">🗺️</button>
                     </div>
                 </div>
+                
                 <div class="listings-grid" id="listingsContainer">
                     <!-- Listings will be populated here -->
                 </div>
-            </div>
+                
+                <div id="map"></div>
+            </main>
         </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message">
+        ✓ Success!
     </div>
 
     <!-- Add Listing Modal -->
     <div class="modal" id="addModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Share with the Island</h2>
+                <h2 class="modal-title">Share Your Discovery</h2>
                 <button class="close-btn" onclick="closeAddModal()">&times;</button>
             </div>
             <form id="addListingForm">
                 <div class="form-group">
-                    <label>What are you sharing?*</label>
-                    <input type="text" id="listingName" required placeholder="Restaurant, event, service, activity...">
-                </div>
-                <div class="form-group">
-                    <label>Category*</label>
-                    <select id="listingCategory" required>
-                        <option value="">Choose the best fit</option>
-                        <option value="food">Food & Drink</option>
-                        <option value="events">Event</option>
-                        <option value="services">Service (handyman, babysitter, etc.)</option>
-                        <option value="activities">Activity</option>
-                        <option value="nightlife">Nightlife</option>
-                        <option value="families">Family Activity</option>
+                    <label class="form-label">Category</label>
+                    <select class="form-select" id="listingCategory" required>
+                        <option value="">Select category</option>
+                        <option value="food">Food & Drinks</option>
+                        <option value="events">Events</option>
+                        <option value="kids">Kids Activities</option>
                         <option value="fitness">Fitness & Wellbeing</option>
-                        <option value="shopping">Shop/Market</option>
-                        <option value="jobs">Job Opportunity</option>
-                        <option value="volunteer">Volunteer Opportunity</option>
+                        <option value="pets">Pet Friendly</option>
+                        <option value="attractions">Attractions</option>
+                        <option value="sporting">Sporting Events</option>
+                        <option value="hedgeveg">Hedge Veg</option>
+                        <option value="other">Suggest Another Category</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label>Tell us about it*</label>
-                    <textarea id="listingDescription" required placeholder="What makes this special? Why should people know about it?"></textarea>
+                
+                <div class="form-group" id="customCategoryGroup" style="display: none;">
+                    <label class="form-label">Suggested Category</label>
+                    <input type="text" class="form-input" id="customCategory" placeholder="What category would you suggest?">
                 </div>
+
                 <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" id="listingLocation" placeholder="Where in Guernsey?">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-input" id="listingName" required placeholder="What would you like to share?">
                 </div>
+
                 <div class="form-group">
-                    <label>Contact Details</label>
-                    <input type="text" id="listingContact" placeholder="How can people get in touch or find out more?">
+                    <label class="form-label">Location</label>
+                    <select class="form-select" id="listingLocation" required>
+                        <option value="">Select area</option>
+                        <option value="St Peter Port">St Peter Port</option>
+                        <option value="St Martin">St Martin</option>
+                        <option value="St Andrew">St Andrew</option>
+                        <option value="St Sampson">St Sampson</option>
+                        <option value="Vale">Vale</option>
+                        <option value="Castel">Castel</option>
+                        <option value="St Saviour">St Saviour</option>
+                        <option value="St Pierre du Bois">St Pierre du Bois</option>
+                        <option value="Torteval">Torteval</option>
+                        <option value="Forest">Forest</option>
+                        <option value="other">Other (specify in description)</option>
+                    </select>
                 </div>
-                <button type="submit" class="submit-btn">Add to Island Insider</button>
+
+                <div class="form-group">
+                    <label class="form-label">Date & Time (for events)</label>
+                    <input type="datetime-local" class="form-input" id="listingDateTime">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Opening Times / Contact</label>
+                    <input type="text" class="form-input" id="listingContact" placeholder="Opening hours, phone number, or website">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" id="listingDescription" required placeholder="Tell us what makes this special and why people should visit. Include any important details like prices, booking requirements, etc."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit for Approval</button>
+                <p style="font-size: 0.75rem; color: #6b7280; margin-top: 0.5rem; text-align: center;">
+                    All submissions are reviewed before being published
+                </p>
             </form>
         </div>
     </div>
 
     <script>
-        // Enhanced sample data covering more categories
-        let listings = [
-            {
-                id: 1,
-                name: "Castle Cornet",
-                category: "activities",
-                description: "Historic castle guarding St Peter Port harbour for 800 years. Explore medieval rooms, cannon firing ceremonies, and stunning harbor views.",
-                location: "St Peter Port",
-                contact: "Open daily 10am-5pm",
-                rating: 4.8,
-                icon: "🏰",
-                date: null
-            },
-            {
-                id: 2,
-                name: "The Rockmount",
-                category: "food",
-                description: "Award-winning gastropub with sea views and locally sourced ingredients. Famous for their Guernsey beef and fresh seafood.",
-                location: "St Martin",
-                contact: "01481 235544",
-                rating: 4.7,
-                icon: "🍽️",
-                date: null
-            },
-            {
-                id: 3,
-                name: "Live Music at Liberation Brewery",
-                category: "nightlife",
-                description: "Local bands and acoustic sessions every Thursday. Great craft beers and relaxed atmosphere in the heart of St Peter Port.",
-                location: "St Peter Port",
-                contact: "Thursdays 8pm",
-                rating: 4.5,
-                icon: "🎵",
-                date: getNextThursday()
-            },
-            {
-                id: 4,
-                name: "Reliable Island Handyman",
-                category: "services",
-                description: "Experienced local handyman for home repairs, garden maintenance, and odd jobs. Fully insured and island references available.",
-                location: "Islandwide",
-                contact: "Call Tom: 07781 234567",
-                rating: 4.9,
-                icon: "🔨",
-                date: null
-            },
-            {
-                id: 5,
-                name: "Petit Bot Bay Coastal Walk",
-                category: "activities",
-                description: "Spectacular cliff path with hidden coves and dramatic sea views. Perfect for sunset walks and wildlife spotting.",
-                location: "South Coast",
-                contact: "Free access",
-                rating: 4.8,
-                icon: "🥾",
-                date: null
-            },
-            {
-                id: 6,
-                name: "Saturday Farmers Market",
-                category: "shopping",
-                description: "Fresh local produce, artisan bread, island honey, and handmade crafts. Meet local growers and makers every Saturday.",
-                location: "St Peter Port",
-                contact: "Saturdays 9am-2pm",
-                rating: 4.6,
-                icon: "🥕",
-                date: getNextSaturday()
-            },
-            {
-                id: 7,
-                name: "Kids Adventure Club",
-                category: "families",
-                description: "Forest adventures and beach exploration for children 5-12. Professional guides and all equipment provided.",
-                location: "Various locations",
-                contact: "Book: 01481 345678",
-                rating: 4.9,
-                icon: "🧒",
-                date: null
-            },
-            {
-                id: 8,
-                name: "Sunrise Yoga Sessions",
-                category: "fitness",
-                description: "Peaceful morning yoga on Vazon Beach. All levels welcome. Watch the sunrise while finding your zen.",
-                location: "Vazon Bay",
-                contact: "Tuesdays & Fridays 7am",
-                rating: 4.7,
-                icon: "🧘",
-                date: getNextTuesday()
+        // Data Management
+        class DataManager {
+            constructor() {
+                this.storageKey = 'islandInsiderListings';
+                this.pendingKey = 'islandInsiderPending';
+                this.ratingsKey = 'islandInsiderRatings';
+                this.loadData();
             }
-        ];
 
+            loadData() {
+                try {
+                    const stored = localStorage.getItem(this.storageKey);
+                    const pending = localStorage.getItem(this.pendingKey);
+                    const ratings = localStorage.getItem(this.ratingsKey);
+                    
+                    this.listings = stored ? JSON.parse(stored) : this.getDefaultListings();
+                    this.pendingListings = pending ? JSON.parse(pending) : [];
+                    this.ratings = ratings ? JSON.parse(ratings) : {};
+                } catch (error) {
+                    console.warn('Could not load from localStorage, using defaults');
+                    this.listings = this.getDefaultListings();
+                    this.pendingListings = [];
+                    this.ratings = {};
+                }
+            }
+
+            saveData() {
+                try {
+                    localStorage.setItem(this.storageKey, JSON.stringify(this.listings));
+                    localStorage.setItem(this.pendingKey, JSON.stringify(this.pendingListings));
+                    localStorage.setItem(this.ratingsKey, JSON.stringify(this.ratings));
+                } catch (error) {
+                    console.warn('Could not save to localStorage');
+                }
+            }
+
+            getDefaultListings() {
+                const nextSaturday = this.getNextSaturday();
+                
+                return [
+                    // Food & Drinks
+                    {
+                        id: 1,
+                        name: "Copenhagen Restaurant",
+                        category: "food",
+                        description: "Guernsey's premier fine dining destination offering contemporary European cuisine with breathtaking views over St Peter Port and Havelet Bay. Award-winning wine list and exceptional service make this perfect for special occasions.",
+                        location: "St Peter Port",
+                        contact: "Open Tue-Sat 7pm-10pm | restaurantcopenhagen.com | 01481 724921",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "🍽️",
+                        status: "approved"
+                    },
+                    {
+                        id: 2,
+                        name: "La Reunion",
+                        category: "food",
+                        description: "Relaxed beachside dining with a focus on locally sourced ingredients and fresh seafood. The perfect spot for a leisurely lunch with sea views, known for their innovative takes on Channel Islands cuisine.",
+                        location: "St Martin",
+                        contact: "Open daily 12pm-9pm | lareunion.gg | 01481 238956",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "🍽️",
+                        status: "approved"
+                    },
+                    {
+                        id: 3,
+                        name: "Pier 17 Restaurant",
+                        category: "food",
+                        description: "Sophisticated seafood and European cuisine in the heart of St Peter Port's harbor. Famous for their fresh catches of the day and extensive wine cellar. The terrace offers stunning harbor views.",
+                        location: "St Peter Port",
+                        contact: "Open daily 6pm-10pm | pier17restaurant.com | 01481 720823",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "🍽️",
+                        status: "approved"
+                    },
+                    {
+                        id: 4,
+                        name: "Red Steakhouse",
+                        category: "food",
+                        description: "Premium steakhouse and cocktail bar perfect for nights out. Featuring the finest cuts of locally sourced beef and creative cocktails. The intimate atmosphere and expert service create an unforgettable evening.",
+                        location: "St Peter Port",
+                        contact: "Open Wed-Sat 6pm-11pm | red.gg | 01481 721455",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "🥩",
+                        status: "approved"
+                    },
+                    {
+                        id: 5,
+                        name: "The Slaughterhouse",
+                        category: "food",
+                        description: "Beloved local restaurant serving hearty lunches and dinners in the heart of St Peter Port. A solid local favorite known for generous portions, friendly service, and excellent value for money.",
+                        location: "St Peter Port",
+                        contact: "Open daily 12pm-2pm, 6pm-9pm | 01481 722624",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "🍽️",
+                        status: "approved"
+                    },
+
+                    // Sporting Events
+                    {
+                        id: 6,
+                        name: "Guernsey Park Run",
+                        category: "sporting",
+                        description: "Free weekly 5km run every Saturday morning at Pembroke Bay. All ages and abilities welcome - no booking needed, just turn up and join the friendly community. Beautiful coastal route with stunning sea views.",
+                        location: "Vale",
+                        contact: "Every Saturday 9am | Free entry | parkrun.org.uk/pembroke",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "🏃",
+                        status: "approved",
+                        date: nextSaturday
+                    },
+                    {
+                        id: 7,
+                        name: "Full Cliff 15 Mile 'Dogbreaker'",
+                        category: "sporting",
+                        description: "Guernsey's most challenging cliff path run - a grueling 15-mile test of endurance along the dramatic south coast cliffs. Not for the faint-hearted! Spectacular views reward those who complete this legendary race.",
+                        location: "South Coast",
+                        contact: "October 5th, 2025 | Entry via Guernsey Athletics | guernseyathletics.com",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "🏃",
+                        status: "approved",
+                        date: "2025-10-05T09:00:00"
+                    },
+                    {
+                        id: 8,
+                        name: "Guernsey vs Jersey Cricket T20",
+                        category: "sporting",
+                        description: "The ultimate Channel Islands sporting rivalry! Watch Guernsey take on Jersey in thrilling T20 cricket matches at the beautiful King George V Sports Ground. Great atmosphere and family-friendly event.",
+                        location: "Castel",
+                        contact: "Various dates summer 2025 | King George V Sports Ground | guernseycc.com",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "🏏",
+                        status: "approved"
+                    },
+
+                    // Attractions
+                    {
+                        id: 9,
+                        name: "Castle Cornet",
+                        category: "attractions",
+                        description: "Historic fortress overlooking St Peter Port harbour with over 800 years of history. Explore medieval rooms, visit four fascinating museums, stroll through beautiful gardens, and witness the famous noon-day gun ceremony.",
+                        location: "St Peter Port",
+                        contact: "Open daily 10am-5pm | Adults £12, Children £6 | 01481 721657",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "🏰",
+                        status: "approved"
+                    },
+                    {
+                        id: 10,
+                        name: "The Little Chapel",
+                        category: "attractions",
+                        description: "The smallest chapel in the world, lovingly decorated with broken pottery, shells, and colorful pebbles. This unique and charming miniature chapel is a testament to one man's devotion and artistic vision.",
+                        location: "St Andrew",
+                        contact: "Open daily, free entry | Donations welcome | Les Vauxbelets",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "⛪",
+                        status: "approved"
+                    },
+
+                    // Kids Activities
+                    {
+                        id: 11,
+                        name: "Oat & Joey Activity Sessions",
+                        category: "kids",
+                        description: "Creative and educational activity sessions for children combining art, nature, and storytelling. Perfect for curious young minds aged 3-10. Check their calendar for seasonal themed activities and workshops.",
+                        location: "Various locations",
+                        contact: "Check calendar online | oatandjoey.com | 07781 456123",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "🎨",
+                        status: "approved"
+                    },
+
+                    // Fitness & Wellbeing
+                    {
+                        id: 12,
+                        name: "Coastal Yoga Sessions",
+                        category: "fitness",
+                        description: "Rejuvenating yoga classes on Guernsey's beautiful beaches and clifftops. All levels welcome. Connect with nature while improving your flexibility and mindfulness. Mats and props provided.",
+                        location: "Various coastal locations",
+                        contact: "Tues/Thurs 7am, Sun 6pm | £12 per session | Sarah: 07781 567890",
+                        rating: 0,
+                        totalRatings: 0,
+                        recommendations: { yes: 0, no: 0 },
+                        icon: "🧘",
+                        status: "approved"
+                    }
+                ];
+            }
+
+            addPendingListing(listing) {
+                const newListing = {
+                    ...listing,
+                    id: Date.now(),
+                    status: "pending",
+                    dateSubmitted: new Date().toISOString(),
+                    icon: this.getCategoryIcon(listing.category),
+                    rating: 0,
+                    totalRatings: 0,
+                    recommendations: { yes: 0, no: 0 }
+                };
+                this.pendingListings.unshift(newListing);
+                this.saveData();
+                return newListing;
+            }
+
+            getListings() {
+                return this.listings.filter(listing => listing.status === "approved");
+            }
+
+            addRating(listingId, rating, recommend) {
+                if (!this.ratings[listingId]) {
+                    this.ratings[listingId] = {
+                        ratings: [],
+                        recommendations: { yes: 0, no: 0 }
+                    };
+                }
+                
+                this.ratings[listingId].ratings.push(rating);
+                this.ratings[listingId].recommendations[recommend]++;
+                
+                const listing = this.listings.find(l => l.id == listingId);
+                if (listing) {
+                    const allRatings = this.ratings[listingId].ratings;
+                    listing.rating = (allRatings.reduce((a, b) => a + b, 0) / allRatings.length).toFixed(1);
+                    listing.totalRatings = allRatings.length;
+                    listing.recommendations = this.ratings[listingId].recommendations;
+                }
+                
+                this.saveData();
+            }
+
+            getCategoryIcon(category) {
+                const icons = {
+                    food: '🍽️',
+                    events: '🎉',
+                    kids: '🎪',
+                    fitness: '🧘',
+                    pets: '🐕',
+                    attractions: '🏛️',
+                    sporting: '🏃',
+                    hedgeveg: '🥕'
+                };
+                return icons[category] || '📍';
+            }
+
+            getNextSaturday() {
+                const today = new Date();
+                const nextSaturday = new Date(today);
+                nextSaturday.setDate(today.getDate() + (6 - today.getDay() + 7) % 7);
+                if (nextSaturday <= today) {
+                    nextSaturday.setDate(nextSaturday.getDate() + 7);
+                }
+                return nextSaturday;
+            }
+        }
+
+        // App State
+        const dataManager = new DataManager();
         let currentFilter = 'all';
         let currentSearch = '';
         let currentDateFilter = 'all';
         let currentView = 'grid';
 
-        function renderListings() {
-            const container = document.getElementById('listingsContainer');
-            const resultsCount = document.getElementById('resultsCount');
-            let filteredListings = listings;
+        // Functions
+        function getFilteredListings() {
+            let filteredListings = dataManager.getListings();
 
-            // Apply category filter
             if (currentFilter !== 'all') {
                 filteredListings = filteredListings.filter(listing => listing.category === currentFilter);
             }
 
-            // Apply date filter
             if (currentDateFilter !== 'all') {
                 const now = new Date();
                 const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -830,7 +1222,7 @@
                 tomorrow.setDate(tomorrow.getDate() + 1);
                 
                 filteredListings = filteredListings.filter(listing => {
-                    if (!listing.date) return currentDateFilter === 'all';
+                    if (!listing.date) return false;
                     
                     const listingDate = new Date(listing.date);
                     
@@ -852,3 +1244,300 @@
                         case 'month':
                             const monthEnd = new Date(today);
                             monthEnd.setMonth(today.getMonth() + 1);
+                            return listingDate >= today && listingDate <= monthEnd;
+                        default:
+                            return true;
+                    }
+                });
+            }
+
+            if (currentSearch) {
+                filteredListings = filteredListings.filter(listing => 
+                    listing.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    listing.description.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    listing.location.toLowerCase().includes(currentSearch.toLowerCase())
+                );
+            }
+
+            return filteredListings;
+        }
+
+        function renderListings() {
+            const container = document.getElementById('listingsContainer');
+            const resultsCount = document.getElementById('resultsCount');
+            const filteredListings = getFilteredListings();
+
+            resultsCount.textContent = `Showing ${filteredListings.length} of ${dataManager.getListings().length} listings`;
+
+            if (filteredListings.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <h3>No listings found</h3>
+                        <p>Try adjusting your search or filters, or add the first listing in this category!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filteredListings.map(listing => `
+                <div class="listing-card" onclick="viewListing(${listing.id})">
+                    <div class="listing-image">
+                        <div class="category-badge">${listing.category}</div>
+                        <span>${listing.icon}</span>
+                    </div>
+                    <div class="listing-content">
+                        <h3 class="listing-title">${listing.name}</h3>
+                        <p class="listing-description">${listing.description}</p>
+                        <div class="listing-details">
+                            <div class="listing-detail"><strong>📍</strong> ${listing.location}</div>
+                            <div class="listing-detail"><strong>ℹ️</strong> ${listing.contact}</div>
+                            ${listing.date ? `<div class="listing-detail"><strong>📅</strong> ${new Date(listing.date).toLocaleDateString('en-GB')}</div>` : ''}
+                        </div>
+                        <div class="listing-footer">
+                            <span class="listing-location">📍 ${listing.location}</span>
+                            <div class="listing-rating">
+                                ${listing.totalRatings > 0 ? `<span class="stars">⭐</span><span>${listing.rating} (${listing.totalRatings})</span>` : '<span style="color: #999;">No ratings yet</span>'}
+                            </div>
+                        </div>
+                        <div class="rating-section">
+                            <div class="rating-controls">
+                                <div class="star-rating" data-listing-id="${listing.id}">
+                                    ${[1,2,3,4,5].map(star => `<span class="star" data-rating="${star}">★</span>`).join('')}
+                                </div>
+                                <div class="recommend-buttons">
+                                    <button class="recommend-btn yes" onclick="event.stopPropagation(); addRecommendation(${listing.id}, 'yes')">👍 ${listing.recommendations.yes}</button>
+                                    <button class="recommend-btn no" onclick="event.stopPropagation(); addRecommendation(${listing.id}, 'no')">👎 ${listing.recommendations.no}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            addStarRatingListeners();
+        }
+
+        function addStarRatingListeners() {
+            document.querySelectorAll('.star-rating').forEach(container => {
+                const stars = container.querySelectorAll('.star');
+                const listingId = container.dataset.listingId;
+
+                stars.forEach((star, index) => {
+                    star.onclick = (e) => {
+                        e.stopPropagation();
+                        const rating = parseInt(star.dataset.rating);
+                        dataManager.addRating(listingId, rating, rating >= 4 ? 'yes' : 'no');
+                        renderListings();
+                        showSuccessMessage(`Thanks for your ${rating}-star rating!`);
+                    };
+
+                    star.onmouseenter = () => {
+                        stars.forEach((s, i) => {
+                            s.style.color = i <= index ? '#f59e0b' : '#e2e8f0';
+                        });
+                    };
+                });
+
+                container.onmouseleave = () => {
+                    stars.forEach(s => s.style.color = '#e2e8f0');
+                };
+            });
+        }
+
+        function addRecommendation(listingId, recommendation) {
+            dataManager.addRating(listingId, recommendation === 'yes' ? 5 : 2, recommendation);
+            renderListings();
+            showSuccessMessage('Thanks for your recommendation!');
+        }
+
+        function viewListing(id) {
+            const listing = dataManager.getListings().find(l => l.id === id);
+            if (listing) {
+                const recommendPercent = Math.round((listing.recommendations?.yes || 0) / ((listing.recommendations?.yes || 0) + (listing.recommendations?.no || 1)) * 100);
+                alert(`${listing.name}\n\n${listing.description}\n\n📍 ${listing.location}\n📞 ${listing.contact}\n⭐ ${listing.rating}/5 (${listing.totalRatings} reviews)\n\n${recommendPercent}% would recommend`);
+            }
+        }
+
+        function toggleView(viewType) {
+            currentView = viewType;
+            
+            // Update active button
+            document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const container = document.getElementById('listingsContainer');
+            const mapElement = document.getElementById('map');
+            
+            if (viewType === 'map') {
+                container.style.display = 'none';
+                mapElement.style.display = 'block';
+                // Initialize map if not already done
+                if (!window.map) {
+                    initMap();
+                }
+            } else {
+                container.style.display = viewType === 'grid' ? 'grid' : 'flex';
+                if (viewType === 'grid') {
+                    container.className = 'listings-grid';
+                } else {
+                    container.className = 'listings-list';
+                }
+                mapElement.style.display = 'none';
+                renderListings();
+            }
+        }
+
+        // Google Maps Integration
+        let map;
+        let mapMarkers = [];
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 11,
+                center: { lat: 49.4567, lng: -2.5345 }, // Center of Guernsey
+                mapTypeControl: true,
+                streetViewControl: true,
+                fullscreenControl: true
+            });
+
+            updateMapMarkers();
+        }
+
+        function updateMapMarkers() {
+            // Clear existing markers
+            mapMarkers.forEach(marker => marker.setMap(null));
+            mapMarkers = [];
+
+            const listings = getFilteredListings();
+            
+            // Default coordinates for listings without specific coordinates
+            const defaultCoordinates = [
+                { lat: 49.4567, lng: -2.5345 },
+                { lat: 49.4234, lng: -2.5123 },
+                { lat: 49.4789, lng: -2.5567 },
+                { lat: 49.4345, lng: -2.5234 },
+                { lat: 49.4678, lng: -2.5456 },
+                { lat: 49.4123, lng: -2.5678 },
+                { lat: 49.4890, lng: -2.5321 },
+                { lat: 49.4456, lng: -2.5789 }
+            ];
+
+            listings.forEach((listing, index) => {
+                const position = defaultCoordinates[index % defaultCoordinates.length];
+                
+                const marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: listing.name,
+                    icon: {
+                        url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
+                            <svg width="32" height="40" viewBox="0 0 32 40" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16 0C7.2 0 0 7.2 0 16c0 12 16 24 16 24s16-12 16-24C32 7.2 24.8 0 16 0z" fill="#17a2b8"/>
+                                <circle cx="16" cy="16" r="10" fill="white"/>
+                                <text x="16" y="20" text-anchor="middle" font-size="14" fill="#17a2b8">${listing.icon}</text>
+                            </svg>
+                        `)}`,
+                        scaledSize: new google.maps.Size(32, 40),
+                        anchor: new google.maps.Point(16, 40)
+                    }
+                });
+
+                const infoWindow = new google.maps.InfoWindow({
+                    content: `
+                        <div style="max-width: 280px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;">
+                            <h3 style="margin: 0 0 8px 0; color: #17a2b8; font-size: 1.1rem;">${listing.name}</h3>
+                            <p style="margin: 0 0 8px 0; font-size: 0.8rem; color: #6c757d; text-transform: uppercase; font-weight: 600;">${listing.category}</p>
+                            <p style="margin: 0 0 12px 0; font-size: 0.9rem; color: #495057; line-height: 1.4;">${listing.description.substring(0, 120)}...</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; color: #6c757d;">
+                                <span>📍 ${listing.location}</span>
+                                ${listing.totalRatings > 0 ? `<span style="color: #f59e0b;">⭐ ${listing.rating}</span>` : '<span>No ratings yet</span>'}
+                            </div>
+                        </div>
+                    `
+                });
+
+                marker.addListener('click', () => {
+                    // Close all other info windows
+                    mapMarkers.forEach(m => {
+                        if (m.infoWindow) {
+                            m.infoWindow.close();
+                        }
+                    });
+                    infoWindow.open(map, marker);
+                });
+
+                marker.infoWindow = infoWindow;
+                mapMarkers.push(marker);
+            });
+        }
+
+        function showSuccessMessage(message) {
+            const successMsg = document.getElementById('successMessage');
+            successMsg.textContent = message;
+            successMsg.classList.add('show');
+            setTimeout(() => {
+                successMsg.classList.remove('show');
+            }, 3000);
+        }
+
+        function openAddModal() {
+            document.getElementById('addModal').classList.add('show');
+        }
+
+        function closeAddModal() {
+            document.getElementById('addModal').classList.remove('show');
+            document.getElementById('addListingForm').reset();
+            document.getElementById('customCategoryGroup').style.display = 'none';
+        }
+
+        // Event Listeners
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            renderListings();
+        });
+
+        document.getElementById('dateFilter').addEventListener('change', (e) => {
+            currentDateFilter = e.target.value;
+            renderListings();
+        });
+
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.category;
+                renderListings();
+            });
+        });
+
+        document.getElementById('listingCategory').addEventListener('change', (e) => {
+            const customGroup = document.getElementById('customCategoryGroup');
+            customGroup.style.display = e.target.value === 'other' ? 'block' : 'none';
+        });
+
+        document.getElementById('addListingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const category = document.getElementById('listingCategory').value;
+            const customCategory = document.getElementById('customCategory').value;
+            
+            const newListing = {
+                name: document.getElementById('listingName').value,
+                category: category === 'other' ? 'suggested' : category,
+                suggestedCategory: customCategory,
+                description: document.getElementById('listingDescription').value,
+                location: document.getElementById('listingLocation').value,
+                contact: document.getElementById('listingContact').value,
+                date: document.getElementById('listingDateTime').value || null
+            };
+
+            dataManager.addPendingListing(newListing);
+            closeAddModal();
+            showSuccessMessage('Listing submitted for approval!');
+        });
+
+        // Initialize
+        renderListings();
+    </script>
+</body>
+</html>
